@@ -1,25 +1,17 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import React, { useRef, useState } from "react"
 import Header from "../component/Header"
 import Lolly from "../component/Lolly"
 import { useCreateLollyMutation } from "../generated/graphql";
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { createLollyMutation } from "../query";
-import dotenv from 'dotenv'
-import { navigate } from "gatsby";
-=======
-import { createLollyMutation } from "./query";
->>>>>>> parent of 4038ce5... btrb
-=======
-import { createLollyMutation } from "./query";
->>>>>>> parent of 4038ce5... btrb
-=======
-import { createLollyMutation } from "./query";
->>>>>>> parent of 4038ce5... btrb
 
-dotenv.config()
+
+
+import { navigate } from "gatsby";
+
+
+
+
+
 
 export default function CreateNew() {
     const [color1, setColor1] = useState("#d52358");
@@ -30,11 +22,9 @@ export default function CreateNew() {
     const senderRef = useRef<HTMLInputElement>();
 
     const [createLolly] = useCreateLollyMutation()
-    console.log(createLolly)
+
     const submitLollyForm = async () => {
-        console.log("clicked");
-        console.log("color 1", color1);
-        console.log("sender", senderRef.current.value);
+   
         const result = await createLolly({
             variables: {
                 recipientName: recipientNameRef.current.value,
@@ -47,6 +37,7 @@ export default function CreateNew() {
         });
 
         console.log("result form server = ", result);
+        navigate(`/lolly/${result.data.createLolly.lollyPath}`)
     }
 
     return (
