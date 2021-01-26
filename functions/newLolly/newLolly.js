@@ -29,12 +29,12 @@ const resolvers = {
       return 'Hello, Lolly!'
     },
   },
-  Mutation : {
+  Mutation: {
     createLolly: async (_, args) => {
 
-        console.log("args = ",args);
-      
-      const client = new faunadb.Client({secret: "fnAEAfQkujACAUCZh08n41P7nKZHHh8FTvgFuG3r"});
+      console.log("args = ", args);
+
+      const client = new faunadb.Client({ secret: "fnAEAfQkujACAUCZh08n41P7nKZHHh8FTvgFuG3r" });
       const id = shortid.generate();
       args.lollyPath = id
 
@@ -43,7 +43,19 @@ const resolvers = {
           data: args
         })
       );
-        
+      // Trigger a new build to freeze this lolly forever
+      fetch("https://api.netlify.com/build_hooks/6010332f1af1fc60b7117a3e", {
+        method: "post"
+      })
+        .then(function (response) {
+          // Report back in the serverless function's logs
+          console.log(response);
+        })
+        .catch(function (error) {
+          // Describe any errors in the serverless function's logs
+          console.log(error);
+        });
+      navigate(`/lolly/${id}`)
       console.log('result', result);
       console.log('result', result.data);
       return result.data
