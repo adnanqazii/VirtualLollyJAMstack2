@@ -3,9 +3,13 @@ import React, { useRef, useState } from "react"
 import Header from "../component/Header"
 import Lolly from "../component/Lolly"
 import { useCreateLollyMutation } from "../generated/graphql";
+<<<<<<< HEAD
 import { createLollyMutation } from "../query";
 import dotenv from 'dotenv'
 import { navigate } from "gatsby";
+=======
+import { createLollyMutation } from "./query";
+>>>>>>> parent of 4038ce5... btrb
 
 dotenv.config()
 
