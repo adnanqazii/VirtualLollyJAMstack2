@@ -3,7 +3,7 @@ import React, {  useRef, useState } from "react"
 import Header from "../component/Header"
 import Lolly from "../component/Lolly"
 import { useCreateLollyMutation } from "../generated/graphql";
-import { createLollyMutation } from "./query";
+import { createLollyMutation } from "../query";
 
 
 export default function CreateNew() {
