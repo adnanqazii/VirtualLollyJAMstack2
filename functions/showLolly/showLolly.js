@@ -1,34 +1,36 @@
 // Docs on event and context https://www.netlify.com/docs/functions/#the-handler-method
-
+const pageTemplate = require('../../src/pages/lollyTemplate.js'); 
 const faunadb = require("faunadb");
 const q = faunadb.query;
 const client = new faunadb.Client({ secret: "fnAEAfQkujACAUCZh08n41P7nKZHHh8FTvgFuG3r" });
-const handler = async (event) => {
+const handler = async (event, context, callback) => {
   
-    const id = event.queryStringParameters.id
-    console.log("SHow lolly")
-    // find the lolly data in the DB
-    client.query(
+    const path = event.queryStringParameters.id
+    console.log("path",path)
+  
+
+    return client.query(
       q.Get(q.Match(q.Index("index_by_path"), path))
     ).then((response) => {
-     // console.log("response:",reponse)
-      // if found return a view
-      // return callback(null, {
-      //   statusCode: 200,
-      //   body: pageTemplate(response.data)
-      // });
+      console.log("template:\n",JSON.stringify(pageTemplate(response.data)))
+   
+      return {
+        statusCode: 200,
+        body: pageTemplate(response.data)
+      }
+   
 
-    }).catch((error) => {
-      // not found or an error, send the sad user to the generic error page
-     // console.log('Error:', error);
-      // return callback(null, {
-      //   body: JSON.stringify(error),
-      //   statusCode: 301,
-      //   headers: {
-      //     Location: `/melted/index.html`,
-      //   }
-      // });
-    })
+   }).catch((error) => {
+    
+     console.log('Error:', error);
+      return callback(null, {
+        body: JSON.stringify(error),
+        statusCode: 301,
+        headers: {
+          Location: `/melted/index.html`,
+        }
+      });
+   })
   
 }
 

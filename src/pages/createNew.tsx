@@ -37,7 +37,7 @@ export default function CreateNew() {
         });
 
         console.log("result form server = ", result);
-        navigate(`/lolly/${result.data.createLolly.lollyPath}`)
+        window.location.href=`/lolly/${result.data.createLolly.lollyPath}`
     }
 
     return (

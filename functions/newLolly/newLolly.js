@@ -50,15 +50,15 @@ const resolvers = {
       })
         .then(function (response) {
           // Report back in the serverless function's logs
-          console.log("response1: ",response);
+        //  console.log("response1: ",response);
         })
         .catch(function (error) {
           // Describe any errors in the serverless function's logs
-          console.log(error);
+         // console.log(error);
         });
       
 
-      console.log('result', result.data);
+   //   console.log('result', result.data);
       return result.data
     },
   }

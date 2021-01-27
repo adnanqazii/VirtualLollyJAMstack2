@@ -3,10 +3,11 @@
     publish ="public"
     functions="functions"
 
+
 [[redirects]]
-    from = "/lolly/*"
-    to = "/.netlify/functions/showLolly?id=:splat"
-    status = 302
+  from = "/lolly/*"
+  to = "/.netlify/functions/showLolly?id=:splat"
+  status = 200
 
 [[redirects]]
     from = "/*"
